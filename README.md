@@ -11,7 +11,6 @@ npm i jquery-scrape
 const $request = requre("jquery-scrape");
 
 $request("https://www.google.com/", $ => {
-
   $("body").html();
 });
 ```
