@@ -1,5 +1,5 @@
 module.exports = function(url, callback){
-  require("request")(url, (err, res, body) => {
+  require("request")(url, function(err, res, body){
     if (err){
       console.log("Error requesting " + url, err);
       return;
