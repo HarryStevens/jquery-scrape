@@ -1,5 +1,5 @@
 # jquery-scrape
-Use jQuery as your selection engine on an HTTP request's response.
+Use jQuery as your selection engine on an HTTP request's response. [![Build Status](https://travis-ci.org/HarryStevens/jquery-scrape.svg?branch=master)](https://travis-ci.org/HarryStevens/jquery-scrape)
 
 ## Installation
 ```bash
