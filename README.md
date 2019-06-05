@@ -37,7 +37,7 @@ $request("https://www.example.com/", $ => {
     });
     data.push(obj);
   });
-  require("fs").writeFileSync("data.csv", JSON.stringify(data));
+  require("fs").writeFileSync("data.json", JSON.stringify(data));
 });
 ```
 
