@@ -9,7 +9,7 @@ npm i jquery-scrape -S
 ## Usage
 jquery-scrape is a convenience wrapper for [request](https://github.com/request/request) and [cheerio](https://github.com/cheeriojs/cheerio). With almost no code, you can make an HTTP request and get back a jQuery selection engine.
 ```js
-const $request = requre("jquery-scrape");
+const $request = require("jquery-scrape");
 
 $request("https://www.example.com/", $ => {
   // Get the inner HTML of the DOM's body element.
