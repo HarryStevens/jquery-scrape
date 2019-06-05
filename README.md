@@ -20,7 +20,7 @@ $request("https://www.example.com/", $ => {
 
   // Traverse through each div...
   $("div").each((i, div) => {
-    ...and get its class.
+    // ...and get its class.
     const class = $(div).attr("class");
   });
 
