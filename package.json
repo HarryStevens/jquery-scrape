@@ -1,6 +1,6 @@
 {
   "name": "jquery-scrape",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Use jQuery as your selection engine on the result of an HTTP request.",
   "main": "index.js",
   "scripts": {
