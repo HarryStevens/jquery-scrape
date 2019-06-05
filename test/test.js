@@ -10,7 +10,7 @@ tape("$request requests some HTML and lets you use jQuery as the selection engin
     test.equal($("h1").text().trim(), "Hello");
     test.equal($("div").html(), "world!");
 
-    $("tr").each(function(rowIndex, row){
+    $("tbody tr").each(function(rowIndex, row){
 
       if (rowIndex === 0){
         test.equal(rowIndex, 0);
