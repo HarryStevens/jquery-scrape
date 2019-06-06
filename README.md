@@ -29,7 +29,7 @@ require("jquery-scrape")("https://www.example.com/", $ => {
 });
 ```
 
-Or suppose you want to scrape a table and output its result as JSON. Suppose the table is structured like [the one in this repo's test directory](https://github.com/HarryStevens/jquery-scrape/blob/master/test/test.html):
+Or suppose you want to scrape a table and save the result as JSON. Suppose the table is structured like [the one in this repo's test directory](https://github.com/HarryStevens/jquery-scrape/blob/master/test/test.html):
 ```html
 <table>
   <thead>
