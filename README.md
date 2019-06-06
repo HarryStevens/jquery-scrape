@@ -7,37 +7,70 @@ npm i jquery-scrape -S
 ```
 
 ## Usage
-jquery-scrape is a convenience wrapper for [request](https://github.com/request/request) and [cheerio](https://github.com/cheeriojs/cheerio). With almost no code, you can make an HTTP request and get back a jQuery selection engine.
+jquery-scrape is a convenience wrapper for [request](https://github.com/request/request) and [cheerio](https://github.com/cheeriojs/cheerio). With almost no code, you can make an HTTP request and get back a jQuery selection engine. Here's a working example that you can run in your terminal:
 ```js
-const $request = require("jquery-scrape");
+require("jquery-scrape")("https://www.example.com/", $ => {
 
-$request("https://www.example.com/", $ => {
   // Get the inner HTML of the DOM's body element.
-  $("body").html();
+  const html = $("body").html();
+  console.log(html);
 
   // Get the href attribute of an anchor tag.
-  $("a").attr("href");
+  const href = $("a").attr("href");
+  console.log(href);
 
-  // Traverse through each div...
-  $("div").each((i, div) => {
-    // ...and get its class.
-    const class = $(div).attr("class");
+  // Traverse through each paragraph...
+  $("p").each((i, p) => {
+    // ...and get its text.
+    const text = $(p).text().trim();
+    console.log(text);
   });
 
-  // Scrape a table.
-  let cols = [];
-  $("thead").find("th").each((i, th) => {
-    cols.push($(th).text().trim());
+});
+```
+
+Or suppose you want to scrape a table and output its result as JSON. Suppose the table is structured like [the one in this repo's test directory](https://github.com/HarryStevens/jquery-scrape/blob/master/test/test.html):
+```html
+<table>
+  <thead>
+    <tr>
+      <th>Number</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>Foo</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>Bar</td>
+    </tr>      
+  </tbody>
+</table>
+```
+
+Scrape it like so:
+```js
+require("jquery-scrape")("https://github.com/HarryStevens/jquery-scrape/blob/master/test/test.html", $ => {
+
+  let columns = [];
+  $("th").each((i, th) => {
+    columns.push($(th).text());
   });
+
   let data = [];
-  $("tbody").find("tr").each((i, tr) => {
-    let obj = {};
-    $(tr).find("td").each((tdIndex, td) => {
-      obj[cols[tdIndex]] = $(td).text().trim();
+  $("tr").each((rowIndex, row) => {
+    let object = {};
+    $(row).find("td").each((cellIndex, cell) => {
+      object[columns[cellIndex]] = $(cell).text();
     });
-    data.push(obj);
+    data.push(object);
   });
-  require("fs").writeFileSync("data.json", JSON.stringify(data));
+
+  fs.writeFileSync("data.json", JSON.stringify(data));
+
 });
 ```
 
