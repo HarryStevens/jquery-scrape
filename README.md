@@ -53,7 +53,7 @@ Or suppose you want to scrape a table and output its result as JSON. Suppose the
 
 Scrape it like so:
 ```js
-require("jquery-scrape")("https://github.com/HarryStevens/jquery-scrape/blob/master/test/test.html", $ => {
+require("jquery-scrape")("https://raw.githubusercontent.com/HarryStevens/jquery-scrape/master/test/test.html", $ => {
 
   let columns = [];
   $("th").each((i, th) => {
@@ -61,15 +61,23 @@ require("jquery-scrape")("https://github.com/HarryStevens/jquery-scrape/blob/mas
   });
 
   let data = [];
-  $("tr").each((rowIndex, row) => {
+  const rows = $("tbody tr");
+  console.log(`Found ${rows.length} rows. Scraping them...`);
+  rows.each((rowIndex, row) => {
     let object = {};
     $(row).find("td").each((cellIndex, cell) => {
       object[columns[cellIndex]] = $(cell).text();
     });
+    console.log(`${((rowIndex + 1) / rows.length * 100).toFixed(1)}%`);
     data.push(object);
   });
 
-  fs.writeFileSync("data.json", JSON.stringify(data));
+  console.log("Writing file: data.json");
+  fs.writeFile("data.json", JSON.stringify(data), err => {
+    if (err) throw err;
+    console.log("File saved.");
+    process.exit();
+  });
 
 });
 ```
