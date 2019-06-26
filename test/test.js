@@ -2,11 +2,9 @@ var path = require("path"),
     tape = require("tape"),
     $request = require("../");
 
-console.log(path.join(__dirname, "test.html"));
-console.log(path.resolve(__dirname, "test.html"));
-
 tape("$request requests some HTML and lets you use jQuery as the selection engine", function(test){
   $request("https://raw.githubusercontent.com/HarryStevens/jquery-scrape/master/test/test.html", function($){
+
     test.equal($("h1").text().trim(), "Hello");
     test.equal($("div").html(), "world!");
 
@@ -45,6 +43,7 @@ tape("$request requests some HTML and lets you use jQuery as the selection engin
 
         });        
       }
+      
     });
 
     test.end();
